@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     public Text scoreText;
     public Text healthText;
 
-    // Start is called before the first frame update
+    // Le démarrage est appelé avant la mise à jour de la première image
     void Start()
     {
         // Vous pouvez ajouter des initialisations ici si nécessaire.
@@ -64,14 +64,10 @@ public class PlayerController : MonoBehaviour
         // Vérifiez si le collider entré a le tag "Pickup".
         if (other.CompareTag("Pickup"))
         {
-            // Incémentez le score.
+            // Incrémentez le score.
             score++;
 
-            // Appel de la Methode SetScoreText()
             SetScoreText();
-
-            // Affichez le nouveau score dans la console.
-            // Debug.Log("Score: " + score);
 
             // Désactivez ou détruisez l'objet "Coin".
             other.gameObject.SetActive(false);
@@ -82,6 +78,8 @@ public class PlayerController : MonoBehaviour
             // Réduisez la santé du joueur en cas de collision avec un "Trap".
             health--;
 
+            SetHealthText();
+
             // Affichez la santé mise à jour dans la console.
             Debug.Log("Health: " + health);
         }
@@ -89,17 +87,23 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("Goal"))
         {
             // Le joueur a atteint son objectif.
-            Debug.Log("You Win !");
+            Debug.Log("You Win!");
         }
-
-
     }
 
     void SetScoreText()
     {
+        if (scoreText != null)
         {
-        scoreText.text = "Score: " + score;
+            scoreText.text = "Score: " + score;
         }
     }
 
+    void SetHealthText()
+    {
+        if (healthText != null)
+        {
+            healthText.text = "Health: " + health;
+        }
+    }
 }
