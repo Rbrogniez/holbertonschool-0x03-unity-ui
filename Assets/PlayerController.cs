@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public float sideForce = 500f;
     private int score = 0;
     public int health = 5;
+    public Text scoreText;
 
     // Start is called before the first frame update
     void Start()
@@ -61,19 +63,17 @@ public class PlayerController : MonoBehaviour
         // Vérifiez si le collider entré a le tag "Pickup".
         if (other.CompareTag("Pickup"))
         {
-            // Incrémentez le score.
+            // Incémentez le score.
             score++;
 
+            // Appel de la Methode SetScoreText()
+            SetScoreText();
+
             // Affichez le nouveau score dans la console.
-            Debug.Log("Score: " + score);
+            // Debug.Log("Score: " + score);
 
             // Désactivez ou détruisez l'objet "Coin".
-            // Vous pouvez choisir l'une ou l'autre option en fonction de votre logique de jeu.
-            // Pour la désactivation :
             other.gameObject.SetActive(false);
-
-            // Pour la destruction :
-            // Destroy(other.gameObject);
         }
 
         if (other.CompareTag("Trap"))
@@ -90,5 +90,15 @@ public class PlayerController : MonoBehaviour
             // Le joueur a atteint son objectif.
             Debug.Log("You Win !");
         }
+
+
     }
+
+    void SetScoreText()
+    {
+        {
+        scoreText.text = "Score: " + score;
+        }
+    }
+
 }
