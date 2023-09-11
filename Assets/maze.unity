@@ -596,6 +596,7 @@ MonoBehaviour:
   sideForce: 2000
   health: 5
   scoreText: {fileID: 584591832}
+  healthText: {fileID: 689702488}
 --- !u!1 &101275641
 GameObject:
   m_ObjectHideFlags: 0

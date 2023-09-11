@@ -69,6 +69,9 @@ public class PlayerController : MonoBehaviour
 
             SetScoreText();
 
+            // Affichez le score mise à jour dans la console.
+            // Debug.Log("Score: " + score);
+
             // Désactivez ou détruisez l'objet "Coin".
             other.gameObject.SetActive(false);
         }
@@ -81,7 +84,7 @@ public class PlayerController : MonoBehaviour
             SetHealthText();
 
             // Affichez la santé mise à jour dans la console.
-            Debug.Log("Health: " + health);
+            // Debug.Log("Health: " + health);
         }
 
         if (other.CompareTag("Goal"))
