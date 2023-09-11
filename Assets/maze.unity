@@ -592,11 +592,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 95156505}
-  forwardForce: 2000
-  sideForce: 2000
+  forwardForce: 1000
+  sideForce: 1000
   health: 5
   scoreText: {fileID: 584591832}
   healthText: {fileID: 689702488}
+  winLoseText: {fileID: 658690842}
+  winLoseImage: {fileID: 349179034}
 --- !u!1 &101275641
 GameObject:
   m_ObjectHideFlags: 0

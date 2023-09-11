@@ -1,17 +1,20 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     public Rigidbody rb;
-    public float forwardForce = 500f;
-    public float sideForce = 500f;
+    public float forwardForce = 1000f;
+    public float sideForce = 1000f;
     private int score = 0;
     public int health = 5;
     public Text scoreText;
     public Text healthText;
+    public Text winLoseText;
+	public Image winLoseImage;
 
     // Le démarrage est appelé avant la mise à jour de la première image
     void Start()
@@ -22,17 +25,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (health <= 0)
+        if (health == 0)
         {
-            // Si la santé du joueur atteint 0 ou moins, c'est le jeu terminé.
-            Debug.Log("Game Over!");
+            winLoseImage.gameObject.SetActive(true);
+			winLoseImage.color = Color.red;
+			winLoseText.color = Color.white;
+			winLoseText.text = "Game Over!";
+            StartCoroutine(LoadScene(3));
 
-            // Rechargez la scène actuelle pour redémarrer le jeu.
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-
-            // Réinitialisez la santé et le score aux valeurs d'origine.
-            health = 5;
-            score = 0;
         }
         else
         {
@@ -55,6 +55,10 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKey("s"))
             {
                 rb.AddForce(0, 0, -forwardForce * Time.deltaTime);
+            }
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+            SceneManager.LoadScene("Menu");
             }
         }
     }
@@ -84,13 +88,16 @@ public class PlayerController : MonoBehaviour
             SetHealthText();
 
             // Affichez la santé mise à jour dans la console.
-            // Debug.Log("Health: " + health);
+            Debug.Log("Health: " + health);
         }
 
         if (other.CompareTag("Goal"))
         {
             // Le joueur a atteint son objectif.
-            Debug.Log("You Win!");
+            winLoseImage.gameObject.SetActive(true);
+			winLoseImage.color = Color.green;
+			winLoseText.color = Color.black;
+			winLoseText.text = "You Win!";
         }
     }
 
@@ -109,4 +116,10 @@ public class PlayerController : MonoBehaviour
             healthText.text = "Health: " + health;
         }
     }
+
+    IEnumerator LoadScene(float seconds)
+	{
+		yield return new WaitForSeconds(seconds);
+		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+	}
 }
