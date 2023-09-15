@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-            SceneManager.LoadScene("Menu");
+            SceneManager.LoadScene(0);
             }
         }
     }
@@ -98,6 +98,7 @@ public class PlayerController : MonoBehaviour
 			winLoseImage.color = Color.green;
 			winLoseText.color = Color.black;
 			winLoseText.text = "You Win!";
+            StartCoroutine(LoadScene(3));
         }
     }
 
